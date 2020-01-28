@@ -22,7 +22,7 @@ def add_vectors(a, b):
     c_b = np.asarray(b, dtype='float32')
 
     #call out of c++ & cuda code
-    addition_driver(&c_out[0], &c_a[0], &c_b[0], N)
+    addition(&c_out[0], &c_a[0], &c_b[0], N)
 
     return np.asarray(c_out)
         

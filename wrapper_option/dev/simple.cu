@@ -1,11 +1,5 @@
 #include<stdio.h>
 
-__global__ void vector_add_cu(float *out, float *a, float *b, int n){
-	for(int i = 0; i < n; i++){
-		out[i] = a[i] + b[i];
-	}
-}
-
 void vector_add(float *out, float *a, float *b, int n) {
     for(int i = 0; i < n; i++){
         out[i] = a[i] + b[i];
@@ -18,7 +12,17 @@ void vector_print(float *in, int n){
     }
 }
 
-void addition_driver(float *out, float *a, float *b, int N){
+
+/* The CUDA Kernel */
+__global__ void vector_add_cu(float *out, float *a, float *b, int n){
+	for(int i = 0; i < n; i++){
+		out[i] = a[i] + b[i];
+	}
+}
+
+
+/* The function to be wrapped by Cython */
+void addition(float *out, float *a, float *b, int N){
     
     float *d_a, *d_b, *d_out;    
 
@@ -38,6 +42,7 @@ void addition_driver(float *out, float *a, float *b, int N){
     cudaFree(d_out);
 }
 
+/* Sample script to check CUDA Kernel */
 int main(){
     float *a, *b, *out; 
     const int N = 100;

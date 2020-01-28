@@ -15,6 +15,8 @@ void vector_print(float *in, int n){
     }
 }
 
+
+/* Sample script to check CUDA Kernel */
 int main(){
     float *a, *b, *out; 
     const int N = 100;

@@ -1,11 +1,13 @@
 #include "simple.hpp"
 
+/*The CUDA kernel */
 __global__ void vector_add_cu(float *out, float *a, float *b, int n){
 	for(int i = 0; i < n; i++){
 		out[i] = a[i] + b[i];
 	}
 }
 
+/* Implementation of the function to be wrapped by Cython */
 void addition(float *out, float *a, float *b, int N){
     
     float *d_a, *d_b, *d_out;    
